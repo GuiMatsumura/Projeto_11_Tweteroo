@@ -35,7 +35,14 @@ app.post("/sign-up", (req, res) => {
 });
 
 app.post("/tweets", (req, res) => {
-  tweets.push(req.body);
+  users.map((user) => {
+    if (user.username === req.body.username) {
+      let tweet = req.body;
+      tweet["avatar"] = user.avatar;
+      tweets.unshift(tweet);
+    }
+  });
+
   res.send("OK");
 });
 
